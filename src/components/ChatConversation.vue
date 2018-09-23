@@ -15,53 +15,53 @@
 </template>
 
 <script>
-import data from '@/data/conversation';
-import ChatBot from '@/components/ChatBot';
+import data from "@/data/conversation";
+import ChatBot from "@/components/ChatBot";
 
 export default {
-  name: 'ChatConversation',
+  name: "ChatConversation",
   data() {
     return {
       conversations: data,
       chat: [
         {
-          time: '12:22 PM',
+          time: "12:22 PM",
           attached: false,
-          from: 'bot',
-          brand: 'Expedia',
+          from: "bot",
+          brand: "Expedia",
           visibility: true,
           cards: [
             {
               image: false,
               text:
-                'Hi, I’m the Expedia bot. I can help you cancel or reconfirm your upcoming booking.',
+                "Hi, I’m the Expedia bot. I can help you cancel or reconfirm your upcoming booking.",
               buttons: []
             }
           ]
         },
         {
-          time: '12:22 PM',
+          time: "12:22 PM",
           attached: true,
-          from: 'bot',
-          brand: 'Expedia',
+          from: "bot",
+          brand: "Expedia",
           visibility: true,
           cards: [
             {
               image: false,
               text:
-                'And if you ask me something I cannot yet help with, I’ll quickly connect you with a friendly customer service agent.',
+                "And if you ask me something I cannot yet help with, I’ll quickly connect you with a friendly customer service agent.",
               buttons: [
                 {
-                  name: 'Upcoming booking',
-                  action: 'Upcoming booking'
+                  name: "Upcoming booking",
+                  action: "Upcoming booking"
                 },
                 {
-                  name: 'Past booking',
-                  action: 'Past booking'
+                  name: "Past booking",
+                  action: "Past booking"
                 },
                 {
-                  name: 'Something else',
-                  action: 'Something else'
+                  name: "Something else",
+                  action: "Something else"
                 }
               ]
             }
@@ -74,12 +74,17 @@ export default {
     ChatBot
   },
   methods: {
+    showBubble(msg) {
+      const self = this;
+      self.chat.push(msg);
+    },
     addChat(action) {
+      const self = this;
       var custResp = {
-        time: '12:22 PM',
+        time: "12:22 PM",
         attached: false,
-        from: 'customer',
-        brand: '',
+        from: "customer",
+        brand: "",
         visibility: true,
         cards: [
           {
@@ -89,18 +94,8 @@ export default {
           }
         ]
       };
-      function showBubble(msg) {
-        console.log('hello');
-        const self = this;
-        self.chat.push(msg);
-      }
-      setTimeout(showBubble, 500, custResp);
-      // setTimeout(showBubble, 700, conversations[3]);
-      // var cust = setInterval(function() {
-      //   self.chat.push(custResp);
-      // }, 1000);
-      // clearInterval(cust);
-      // this.chat.push(this.conversations[3]);
+      setTimeout(this.showBubble, 500, custResp);
+      setTimeout(this.showBubble, 1000, self.conversations[3]);
     }
   }
 };
@@ -124,7 +119,7 @@ export default {
 }
 .brand-logo {
   position: absolute;
-  background-image: url('../assets/logo-expedia.png');
+  background-image: url("../assets/logo-expedia.png");
   height: 32px;
   width: 32px;
   top: 20px;
