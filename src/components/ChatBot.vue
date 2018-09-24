@@ -10,7 +10,7 @@
         <div class="card-buttons" v-if="card.buttons.length">
           <button class="btn-chat" 
             v-for="(button, index) in card.buttons" :key="index"
-            v-on:click="doAction(button.action)">{{button.name}}</button>
+            v-on:click="doAction(button.name, button.action)">{{button.name}}</button>
         </div>
     </div>
   </div>
@@ -18,18 +18,18 @@
 
 <script>
 export default {
-  name: 'ChatBot',
+  name: "ChatBot",
   data() {
     return {};
   },
-  props: ['conversation'],
+  props: ["conversation"],
   methods: {
     getImgUrl(img) {
-      var image = require('../assets/photos/' + img + '.png');
+      var image = require("../assets/photos/" + img + ".png");
       return image;
     },
-    doAction(action) {
-      this.$emit('button_event', action);
+    doAction(name, action) {
+      this.$emit("buttonEvent", { name, action });
     }
   }
 };
