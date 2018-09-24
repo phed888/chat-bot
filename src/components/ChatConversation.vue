@@ -9,7 +9,7 @@
           v-bind:class="{'customer': conversation.from == 'customer'}"
         >{{conversation.time}}
         </div>
-        <ChatBot v-bind:conversation="conversation" v-on:button_event="addChat($event)"></ChatBot>
+        <ChatBot v-bind:conversation="conversation" v-on:buttonEvent="addChat($event)"></ChatBot>
       </div>
     </div>
 </template>
@@ -53,7 +53,7 @@ export default {
               buttons: [
                 {
                   name: "Upcoming booking",
-                  action: "Upcoming booking"
+                  action: "5"
                 },
                 {
                   name: "Past booking",
@@ -74,11 +74,14 @@ export default {
     ChatBot
   },
   methods: {
+    explode: function({ name, action }) {
+      console.log(name + ", " + action);
+    },
     showBubble(msg) {
       const self = this;
       self.chat.push(msg);
     },
-    addChat(action) {
+    addChat({ name, action }) {
       const self = this;
       var custResp = {
         time: "12:22 PM",
@@ -89,13 +92,13 @@ export default {
         cards: [
           {
             image: false,
-            text: action,
+            text: name,
             buttons: []
           }
         ]
       };
       setTimeout(this.showBubble, 500, custResp);
-      setTimeout(this.showBubble, 1000, self.conversations[3]);
+      setTimeout(this.showBubble, 1000, self.conversations[action]);
     }
   }
 };
